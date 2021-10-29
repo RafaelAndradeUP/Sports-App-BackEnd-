@@ -1,0 +1,24 @@
+{
+  "name": "yarder",
+  "version": "1.0.0",
+  "description": "Red social enfocada en deportes",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Deportes"
+  ],
+  "author": "Rafael Andrade",
+  "license": "ISC",
+  "dependencies": {
+    "errorhandler": "^1.5.1",
+    "express": "^4.17.1",
+    "express-handlebars": "^5.3.4",
+    "fs-extra": "^10.0.0",
+    "mongoose": "^6.0.12",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.3",
+    "react-engine": "^4.5.1"
+  }
+}
