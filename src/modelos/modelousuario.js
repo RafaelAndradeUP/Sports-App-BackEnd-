@@ -6,12 +6,12 @@ const userSchema =new mongoose.Schema({
         required: true, 
         unique:true
     },
-    contrasena: {
+    password: {
         type: String, 
         required: true, 
         unique:false
     },
-    correo: {
+    email: {
         type: String, 
         required: true, 
         unique:true
