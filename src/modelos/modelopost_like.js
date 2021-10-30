@@ -1,10 +1,18 @@
 const mongoose = require("mongoose");
+const { ObjectId } = mongoose.Schema;
 
 const PLSchema =new mongoose.Schema({
-    id: {type: String, required: true, unique:true},
-    post: String,
-    usuario: String
-});
+    postId: {
+        type: ObjectId,
+        ref: 'Post'
+    },
+    usuarioId: {
+        type: ObjectId,
+        ref: 'Usuario'
+    }
+},
+{timestamps: true}
+);
 
-const PL = mongoose.model("PL",PLSchema);
+const PL = mongoose.model("PL", PLSchema, 'Interacciones');
 module.exports= PL;
