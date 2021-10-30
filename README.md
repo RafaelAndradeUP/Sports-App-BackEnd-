@@ -1,4 +1,6 @@
-# Sports-App
-Proyecto Desarrollo de Aplicaciones Web
-Yarder
-Para usarlo hay que abrir MongoDB y tener el puerto 3000 disponible.
+(Utilizar branch login and register working)
+
+1. Correr npm install para instalar las dependencias en backend y frontend
+2. Abrir MongoDB
+3. correr npm start en el frontend para iniciar el cliente
+4. Correr npm start en el backend para iniciar el servidor
