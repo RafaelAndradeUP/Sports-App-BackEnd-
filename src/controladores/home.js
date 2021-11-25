@@ -7,11 +7,12 @@ const jwt = require('jsonwebtoken');
 const control={};
 
 control.inicio=(req,res)=>{
-    Post.find({},function(err,posts){
-        res.send({
-          postsList:posts
-        });
-    });
+  
+    //Post.find({},function(err,posts){
+        //res.send({postsList:posts});
+        
+    //});
+    res.send("Hola Mundo");
     console.log('Pagina de inicio');
 };
 control.chargeuser=(req,res)=>{
