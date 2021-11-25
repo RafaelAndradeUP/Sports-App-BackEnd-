@@ -20,10 +20,9 @@ console.log(mongoURL);
 
 router.get('/',home.inicio);
 
-router.get('/publicar', publicacion.crear);
 router.post('/publicar',publicacion.crear);
 
-router.post('/:post_id/like',publicacion.like);
+router.post('/:user_id/like',publicacion.like);
 
 router.delete('/:post_id/delete',publicacion.eliminar);
 
@@ -32,10 +31,9 @@ router.get('/usuario/:id_usuario',home.chargeuser);
 router.post('/registro',home.registro);
 router.post("/login", home.login);
 
+//Pendientes
 router.get('/recuperarcontrasena',home.inicio);
 router.post('/recuperarcontrasena',home.lostpassword);
-
-
 router.get('/modificarperfil',home.inicio);
 router.post('/modificarperfil',home.modificarperfil);
 

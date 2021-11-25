@@ -14,6 +14,10 @@ const postSchema =new mongoose.Schema({
             type: Number,
             default: 0
         },
+        usuarioId: {
+            type: ObjectId,
+            ref: 'Usuario'
+        },
     },
     {timestamps: true}
 );

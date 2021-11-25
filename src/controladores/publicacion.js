@@ -7,20 +7,39 @@ const Usuario = require('../modelos/modelousuario');
 const control={};
 
 
-control.crear=(req,res)=>{
-    let Aux=new Post({ususario:String(req.body.usuario),texto:String(req.body.texto),nlikes:0});
-    Aux.save();
-    res.send(Aux.json());
+control.crear= async(req,res)=>{
+    const Aux=new Post({ususario:String(req.body.usuario),texto:String(req.body.texto),nlikes:0,usuarioId:req.body.usuarioId});
+    try{
+        Aux.save();
+        res.status(200).json(Aux);
+    }
+    catch(error){
+        res.status(400).json({message:error.message});
+    }
+    
 };
 control.like=(req,res)=>{
-    let Aux=new PL({postId:req.body.postId, usuarioID:req.body.usuarioID});
-    Aux.save();
-    Post.updateOne({id:req.body.postId},{$inc:{nlikes:1}}).then((data)=>{console.log("Likeado")}).catch((err)=>console.log("Algo salio mal al opinar:",err));
-    res.send('Gracias, tu opinion es importante');
+    const Aux=new PL({postId:req.body.postId, usuarioID:req.params});
+    try{
+        Aux.save();
+        Post.updateOne({id:req.body.postId},{$inc:{nlikes:1}}).then((data)=>{console.log("Likeado")}).catch((err)=>console.log("Algo salio mal al opinar:",err));
+        res.status(200).json(Aux);
+    }
+    catch(error){
+        res.status(400).json({message:error.message});
+    }
+    
+    
 };
 control.eliminar=(req,res)=>{
-    Post.deleteOne({id:req.body.postId}).then((data)=>{console.log("Eliminado")}).catch((err)=>console.log("Algo salio mal al borrar:",err));
-    res.send('Post eliminado')
+    try{
+        Post.deleteOne({id:req.params}).then((data)=>{console.log("Eliminado")}).catch((err)=>console.log("Algo salio mal al borrar:",err));
+        res.status(200).json()
+    }
+    catch(error){
+        res.status(400).json({message:error.message});
+    }
+    
 };
 
 module.exports=control;
