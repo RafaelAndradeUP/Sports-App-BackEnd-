@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 
 const control={};
 
-control.inicio=(req,res)=>{
+control.inicio = async (req,res)=>{
   
   try{
     const posts= await Post.find().exec();

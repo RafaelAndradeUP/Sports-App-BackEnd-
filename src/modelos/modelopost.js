@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
+const { ObjectId } = mongoose.Schema;
 
 const postSchema =new mongoose.Schema({
-        usuario: {
-            type: String, 
-            required: true, 
-            unique:false
+        tema: {
+            type: String,
+            required: true
         },
         texto: {
             type: String,
@@ -17,6 +17,10 @@ const postSchema =new mongoose.Schema({
         usuarioId: {
             type: ObjectId,
             ref: 'Usuario'
+        },
+        imagen: {
+            data: Buffer,
+            contentType: String,
         },
     },
     {timestamps: true}
