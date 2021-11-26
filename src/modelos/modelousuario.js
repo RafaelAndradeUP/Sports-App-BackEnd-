@@ -15,7 +15,11 @@ const userSchema =new mongoose.Schema({
         type: String, 
         required: true, 
         unique:true
-    }
+    },
+    imagen: {
+        data: Buffer,
+        contentType: String,
+    },
 },
 {timestamps: true}
 );

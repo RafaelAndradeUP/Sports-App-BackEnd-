@@ -6,22 +6,28 @@ const jwt = require('jsonwebtoken');
 
 const control={};
 
-control.inicio=(req,res)=>{
-    Post.find({},function(err,posts){
-        res.send({
-          postsList:posts
-        });
-    });
-    console.log('Pagina de inicio');
+control.inicio = async (req,res)=>{
+  
+  try{
+    const posts= await Post.find().exec();
+    res.status(200).json(posts);
+
+  }
+  catch(error){
+    res.status(400).json({message:error.message});
+  }
 };
-control.chargeuser=(req,res)=>{
+control.chargeuser= async(req,res)=>{
     console.log("Accediendo a los posts de un usuario");
+    try{
+      const posts= await Post.find({usuarioId:req.params}).exec();
+      res.status(200).json(posts);
+
+    }
+    catch(error){
+      res.status(400).json({message:error.message});
+    }
     
-    Post.find({usuario:req.body.usuario},function(err,posts){
-        res.send({
-          postsList:posts
-        });
-    });
 };
 
 control.login = async (req,res)=>{

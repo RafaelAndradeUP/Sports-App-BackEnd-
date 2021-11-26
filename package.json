@@ -15,8 +15,10 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
     "errorhandler": "^1.5.1",
     "express": "^4.17.1",
+    "express-formidable": "^1.2.0",
     "express-handlebars": "^5.3.4",
     "fs-extra": "^10.0.0",
     "jsonwebtoken": "^8.5.1",
