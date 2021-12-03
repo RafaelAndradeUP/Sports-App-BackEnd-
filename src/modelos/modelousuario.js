@@ -20,6 +20,10 @@ const userSchema =new mongoose.Schema({
         data: Buffer,
         contentType: String,
     },
+    nseguidores: {
+        type: Number,
+        default: 0
+    },
 },
 {timestamps: true}
 );

@@ -20,6 +20,7 @@ control.crear= async(req,res)=>{
             post.imagen.data = fs.readFileSync(files.imagen.path);
             post.imagen.contentType = files.imagen.type;
         }
+        
 
         post.save((err, result) => {
             if (err) {

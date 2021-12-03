@@ -37,6 +37,8 @@ router.get('/usuario/:userId',usuario.getUser);
 router.get('/usuario/imagen/:userId', usuario.imagen);
 router.get('/usuario/hasimage/:userId', usuario.hasImage);
 router.put('/usuario/update/:userId', formidable(), usuario.updateUser);
+//Seguir usuario
+router.post('/nuevoseguidor',formidable(),usuario.follow);
 
 router.post('/registro',home.registro);
 router.post("/login", home.login);
@@ -44,8 +46,8 @@ router.post("/login", home.login);
 //Pendientes
 router.get('/recuperarcontrasena',home.inicio);
 router.post('/recuperarcontrasena',home.lostpassword);
-router.get('/modificarperfil',home.inicio);
-router.post('/modificarperfil',home.modificarperfil);
+
+
 
 //app.use(bodyParser.urlencoded({ extended: false }))
 //app.use(bodyParser.json())
