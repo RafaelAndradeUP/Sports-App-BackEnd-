@@ -1,6 +1,8 @@
 const Usuario = require('../modelos/modelousuario');
 const fs = require('fs');
 const SU = require('../modelos/modusuario_seguidor');
+const ST= require('../modelos/modeloseguirtema');
+const Tema=require('../modelos/modelotema');
 
 const usuario = {};
 
@@ -64,6 +66,19 @@ usuario.hasImage = async (req, res) => {
       let s= new SU(req.fields);
       await s.save();
       await Usuario.findByIdAndUpdate(s.Seguido,{$inc:{nseguidores:1}}).then((data)=>{console.log("Seguido")}).catch((err)=>console.log("Algo salio mal al seguir este usuario",err));
+      res.status(200).json(s);
+
+    }
+    catch(error){
+      res.status(400).json({message:error.message});
+    }
+
+  };
+  usuario.followtopic =async(req,res)=>{
+    try{
+      let s= new ST(req.fields);
+      await s.save();
+      await Tema.findByIdAndUpdate(s.temaId,{$inc:{nseguidores:1}}).then((data)=>{console.log("Seguido")}).catch((err)=>console.log("Algo salio mal al seguir tema",err));
       res.status(200).json(s);
 
     }

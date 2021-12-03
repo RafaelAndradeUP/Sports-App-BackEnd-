@@ -6,6 +6,12 @@ const postSchema =new mongoose.Schema({
             type: String,
             required: true
         },
+        temaId:{
+            type: ObjectId, 
+            ref: 'Tema',
+            required: false, 
+            unique:false
+        },
         texto: {
             type: String,
             required: true

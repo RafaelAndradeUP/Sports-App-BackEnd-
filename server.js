@@ -39,6 +39,8 @@ router.get('/usuario/hasimage/:userId', usuario.hasImage);
 router.put('/usuario/update/:userId', formidable(), usuario.updateUser);
 //Seguir usuario
 router.post('/nuevoseguidor',formidable(),usuario.follow);
+//Seguir tema (equipo,etc)
+router.post('/seguirequipo',formidable(),usuario.followtopic);
 
 router.post('/registro',home.registro);
 router.post("/login", home.login);
