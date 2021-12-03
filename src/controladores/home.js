@@ -20,8 +20,8 @@ control.inicio = async (req,res)=>{
 control.chargeuser= async(req,res)=>{
     console.log("Accediendo a los posts de un usuario");
     try{
-      const posts= await Post.find({usuarioId:req.params}).exec();
-      res.status(200).json(posts);
+      let posts= await Post.find({usuarioId:req.paramsuserId}).exec();
+      res.status(200).send(posts);
 
     }
     catch(error){
