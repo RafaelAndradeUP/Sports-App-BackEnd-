@@ -90,15 +90,4 @@ control.registro = async (req,res)=>{
       }
 };
 
-
-control.lostpassword=(req,res)=>{
-    console.log("Recuperando contraseña");
-    res.send('Pagina de inicio');
-};
-
-control.modificarperfil=(req,res)=>{
-    console.log("Modificando una cuenta");
-    Usuario.updateOne({nombre_usuario:req.body.username},{$set:{nombre_usuario:req.body.new_username}}).then((data)=>{console.log("Actualizado")}).catch((err)=>console.log("Algo salio mal al actualizar:",err));
-};
-
 module.exports=control;

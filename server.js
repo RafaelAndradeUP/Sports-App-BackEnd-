@@ -43,13 +43,11 @@ router.get('/usuario/posts/:userId',home.chargeuser);
 router.post('/nuevoseguidor',formidable(),usuario.follow);
 //Seguir tema (equipo,etc)
 router.post('/seguirequipo',formidable(),usuario.followtopic);
+//Buscar usuarios
+router.get('/buscar/:searchCriteria',usuario.search);
 
 router.post('/registro',home.registro);
 router.post("/login", home.login);
-
-//Pendientes
-router.get('/recuperarcontrasena',home.inicio);
-router.post('/recuperarcontrasena',home.lostpassword);
 
 
 

@@ -88,5 +88,17 @@ usuario.hasImage = async (req, res) => {
 
   };
 
+  usuario.search=async(req,res)=>{
+    try{
+      let search_results = await Usuario.find({ $or: [ { nombre_usuario: req.params.searchCriteria }, { email:req.params.searchCriteria } ] })
+      .select('-password').exec();
+      res.status(200).json(search_results);
+    }
+    catch(error){
+      res.status(400).json({message:error.message});
+    }
+
+  };
+
 
 module.exports = usuario;
