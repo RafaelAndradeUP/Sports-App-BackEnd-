@@ -45,6 +45,8 @@ router.post('/nuevoseguidor',formidable(),usuario.follow);
 router.post('/seguirequipo',formidable(),usuario.followtopic);
 //Buscar usuarios
 router.get('/buscar/:searchCriteria',usuario.search);
+//Devolver los posts de los usuarios a los que sigues
+router.get('/posts/favoritos/:userId',home.FavPosts);
 
 router.post('/registro',home.registro);
 router.post("/login", home.login);

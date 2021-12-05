@@ -20,7 +20,7 @@ control.inicio = async (req,res)=>{
 control.chargeuser= async(req,res)=>{
     console.log("Accediendo a los posts de un usuario");
     try{
-      let posts= await Post.find({usuarioId:req.paramsuserId}).exec();
+      let posts= await Post.find({usuarioId:req.params.userId}).exec();
       res.status(200).send(posts);
 
     }
@@ -88,6 +88,21 @@ control.registro = async (req,res)=>{
         // console.log("CREATE USER FAILED", err);
         return res.status(400).send("Error. Por favor, vuelva a intentar.");
       }
+};
+
+control.FavPosts= async(req,res)=>{
+
+  try{
+    A = new Array();
+    await SU.find({seguidor:req.params.userId}).forEach( D => A.push(D.Seguido));
+    let posts= await Post.find({ usuarioId : { $in : A } }).exec();
+    res.status(200).send(posts);
+
+  }
+  catch(error){
+    res.status(400).json({message:error.message});
+  }
+  
 };
 
 module.exports=control;
