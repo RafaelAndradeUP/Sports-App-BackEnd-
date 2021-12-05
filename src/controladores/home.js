@@ -3,6 +3,8 @@ const SU = require('../modelos/modusuario_seguidor');
 const Post = require('../modelos/modelopost');
 const Usuario = require('../modelos/modelousuario');
 const jwt = require('jsonwebtoken');
+const ST= require('../modelos/modeloseguirtema');
+const Tema=require('../modelos/modelotema');
 
 const control={};
 
@@ -96,6 +98,21 @@ control.FavPosts= async(req,res)=>{
     A = new Array();
     await SU.find({seguidor:req.params.userId}).forEach( D => A.push(D.Seguido));
     let posts= await Post.find({ usuarioId : { $in : A } }).exec();
+    res.status(200).send(posts);
+
+  }
+  catch(error){
+    res.status(400).json({message:error.message});
+  }
+  
+};
+
+control.FavTopics= async(req,res)=>{
+
+  try{
+    A = new Array();
+    await ST.find({usuarioId:req.params.userId}).forEach( D => A.push(D.temaId));
+    let posts= await Post.find({ temaId : { $in : A } }).exec();
     res.status(200).send(posts);
 
   }

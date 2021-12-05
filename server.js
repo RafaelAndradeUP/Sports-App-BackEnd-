@@ -47,6 +47,8 @@ router.post('/seguirequipo',formidable(),usuario.followtopic);
 router.get('/buscar/:searchCriteria',usuario.search);
 //Devolver los posts de los usuarios a los que sigues
 router.get('/posts/favoritos/:userId',home.FavPosts);
+//Devolver los posts de los temas a los que sigues
+router.get('/temas/favoritos/:userId',home.FavTopics);
 
 router.post('/registro',home.registro);
 router.post("/login", home.login);
