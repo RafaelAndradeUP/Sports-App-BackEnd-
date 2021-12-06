@@ -1,7 +1,7 @@
 const Usuario = require('../modelos/modelousuario');
 const fs = require('fs');
 const SU = require('../modelos/modusuario_seguidor');
-const ST= require('../modelos/modeloseguirtema');
+const ST= require('../modelos/modeloseguirtema.js');
 const Tema=require('../modelos/modelotema');
 
 const usuario = {};
@@ -74,6 +74,51 @@ usuario.hasImage = async (req, res) => {
     }
 
   };
+
+  usuario.followteam =async(req,res)=>{
+    console.log(req.fields);
+    try{
+      let s= new ST(req.fields);
+      let result = await s.save();
+      res.status(200).json(result);
+
+    }
+    catch(error){
+      res.status(400).json({message:error.message});
+    }
+
+  };
+
+  usuario.unfollow =async(req,res)=>{
+    try{
+      const { docId, SeguidoID } = req.body; 
+        await SU.findByIdAndRemove(docId);
+        await Usuario.findByIdAndUpdate(SeguidoID,{$inc:{nseguidores: -1}}).then((data)=>{console.log("Dejo de seguir")}).catch((err)=>console.log("Algo salio mal al opinar:",err));
+        res.status(200).send({
+            ok: true
+        });
+
+    }
+    catch(error){
+      res.status(400).json({message:error.message});
+    }
+
+  };
+
+  usuario.unfollowteam =async(req,res)=>{
+    try{ 
+        await ST.findByIdAndRemove(req.params.docId);
+        res.status(200).send({
+            ok: true
+        });
+
+    }
+    catch(error){
+      res.status(400).json({message:error.message});
+    }
+
+  };
+
   usuario.followtopic =async(req,res)=>{
     try{
       let s= new ST(req.fields);
@@ -90,11 +135,11 @@ usuario.hasImage = async (req, res) => {
 
   usuario.search=async(req,res)=>{
     try{
-      let search_results = await Usuario.find({ $or: [ { nombre_usuario: req.params.searchCriteria }, { email:req.params.searchCriteria } ] })
+      let search_results = await Usuario.find({ $or: [ { nombre_usuario: { $regex: '.*' + req.params.searchCriteria + '.*' } }, { email: { $regex: '.*' + req.params.searchCriteria + '.*' } } ] })
       .select('-password').exec();
       res.status(200).json(search_results);
     }
-    catch(error){
+    catch(error){s
       res.status(400).json({message:error.message});
     }
 

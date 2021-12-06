@@ -29,8 +29,10 @@ router.post('/dislike',publicacion.dislike);
 
 router.delete('/delete/:postId',publicacion.eliminar);
 
-router.get('/posts', publicacion.posts);
+router.get('/posts/:userId', publicacion.posts);
 router.get('/pl/:userId', publicacion.pls);
+router.get('/su/:userId', publicacion.sus);
+router.get('/st/:userId', publicacion.sts);
 router.get('/posts/imagen/:postId', publicacion.imagen);
 
 router.get('/usuario/:userId',usuario.getUser);
@@ -41,6 +43,9 @@ router.put('/usuario/update/:userId', formidable(), usuario.updateUser);
 router.get('/usuario/posts/:userId',home.chargeuser);
 //Seguir usuario
 router.post('/nuevoseguidor',formidable(),usuario.follow);
+router.post('/nuevoseguidorequipo',formidable(),usuario.followteam);
+router.post('/dejardeseguir', usuario.unfollow);
+router.post('/dejardeseguirequipo/:docId', usuario.unfollowteam);
 //Seguir tema (equipo,etc)
 router.post('/seguirequipo',formidable(),usuario.followtopic);
 //Buscar usuarios

@@ -50,6 +50,8 @@ control.login = async (req,res)=>{
               _id: user._id,
               nombre_usuario: user.nombre_usuario,
               email: user.email,
+              imagen: user.imagen,
+              nseguidores: user.nseguidores,
               createdAt: user.createdAt,
               updatedAt: user.updatedAt,
             },
@@ -93,13 +95,19 @@ control.registro = async (req,res)=>{
 };
 
 control.FavPosts= async(req,res)=>{
-
+  console.log(req.params.userId);
   try{
-    A = new Array();
-    await SU.find({seguidor:req.params.userId}).forEach( D => A.push(D.Seguido));
-    let posts= await Post.find({ usuarioId : { $in : A } }).exec();
+    A = [];
+    A.push(req.params.userId);
+    let aux = await SU.find({seguidor:req.params.userId}).exec();
+    aux.forEach( D => A.push(D.Seguido._id));
+    console.log(A);
+    const posts= await Post.find({ usuarioId : { $in : A } })
+    .populate('usuarioId')
+    .sort({createdAt: -1})
+    .exec();
+    console.log(posts);
     res.status(200).send(posts);
-
   }
   catch(error){
     res.status(400).json({message:error.message});
