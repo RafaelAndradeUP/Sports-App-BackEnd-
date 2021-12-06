@@ -1,5 +1,6 @@
 const PL = require('../modelos/modelopost_like');
 const SU = require('../modelos/modusuario_seguidor');
+const ST = require('../modelos/modeloseguirtema');
 const Post = require('../modelos/modelopost');
 const Usuario = require('../modelos/modelousuario');
 const fs = require('fs');
@@ -72,6 +73,33 @@ control.pls= async(req,res)=>{
     
 };
 
+control.sus= async(req,res)=>{
+    try{
+        const sus = await SU.find({seguidor: req.params.userId})
+        .sort({createdAt: -1})
+        .populate('Seguido')
+        .exec();
+        res.status(200).send(sus);
+    }
+    catch(error){
+        res.status(400).json({message:error.message});
+    }
+    
+};
+
+control.sts= async(req,res)=>{
+    try{
+        const sts = await ST.find({followerId: req.params.userId})
+        .sort({createdAt: -1})
+        .exec();
+        res.status(200).send(sts);
+    }
+    catch(error){
+        res.status(400).json({message:error.message});
+    }
+    
+};
+
 control.like = async (req,res)=>{
     try{
         let like = new PL(req.fields);
@@ -88,7 +116,6 @@ control.like = async (req,res)=>{
 
 control.dislike = async (req,res)=>{
     try{
-        console.log(req.body);
         const { docId, postId } = req.body; 
         await PL.findByIdAndRemove(docId);
         await Post.findByIdAndUpdate(postId,{$inc:{nlikes: -1}}).then((data)=>{console.log("Dislikeado")}).catch((err)=>console.log("Algo salio mal al opinar:",err));
